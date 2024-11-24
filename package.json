@@ -1,0 +1,107 @@
+{
+  "name": "sitecorepal",
+  "displayName": "sitecorepal",
+  "description": "",
+  "version": "1.0",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "API Configuration",
+      "properties": {
+        "extension.apiUrl": {
+          "type": "string",
+          "default": "",
+          "description": "The API endpoint URL to AI Service which is usde for code generation."
+        },
+        "extension.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "The API key for authentication with the API."
+        },
+        "extension.componentFilePath": {
+          "type": "string",
+          "default": "src/sxastarter/src/components/pagecontent",
+          "description": "The file path where components are stored."
+        },
+        "extension.templatePath": {
+          "type": "string",
+          "default": "/sitecore/templates/Feature/XMCSymposium/Page Content",
+          "description": "The path in Sitecore where data-source templates are created."
+        },
+        "extension.templateParentId": {
+          "type": "string",
+          "default": "45255a11-0e65-42ba-a37b-46195580bc14",
+          "description": "The ID in Sitecore where data-source templates are created."
+        },
+        "extension.componentYmlPath": {
+          "type": "string",
+          "default": "src/items/XMCSymposium-Feature-Templates/XMCSymposium/Page Content",
+          "description": "The file path for YAML files."
+        },
+        "extension.renderingItemParentPath": {
+          "type": "string",
+          "default": "/sitecore/layout/Renderings/Project/XMCSymposium/Page Content",
+          "description": "The parent path for rendering items in Sitecore."
+        },
+        "extension.renderingItemParentId": {
+          "type": "string",
+          "default": "bd033d59-6931-4def-93e1-6e100bf0296d",
+          "description": "The parent ID for rendering items in Sitecore."
+        },
+        "extension.renderingYmlPath": {
+          "type": "string",
+          "default": "src/items/XMCSymposium-Project-Renderings/XMCSymposium/Page Content",
+          "description": "The file path for rendering YAML files."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "sitecorepal.createComponent",
+        "title": "Create Sitecore JSS Component"
+      },
+      {
+        "command": "sitecorepal.askSitecoreCodeGPT",
+        "title": "Ask Sitecore Code GPT"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.92.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "esbuild": "^0.21.5",
+    "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "axios": "^1.7.7"
+  }
+}
